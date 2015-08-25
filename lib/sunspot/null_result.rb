@@ -8,6 +8,8 @@ module Sunspot
       @collection = collection
     end
 
+    # OPTIMIZE: Add other methods listed in
+    # https://github.com/sunspot/sunspot/blob/master/sunspot_rails/lib/sunspot/rails/stub_session_proxy.rb
     class PaginatedNullArray < Array
 
       def initialize(*items)
