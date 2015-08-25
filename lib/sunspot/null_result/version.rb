@@ -1,5 +1,5 @@
 module Sunspot
-  module NullResult
+  class NullResult
     VERSION = "0.1.0"
   end
 end
