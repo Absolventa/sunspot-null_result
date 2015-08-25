@@ -6,12 +6,12 @@ require 'sunspot/null_result/version'
 Gem::Specification.new do |spec|
   spec.name          = "sunspot-null_result"
   spec.version       = Sunspot::NullResult::VERSION
-  spec.authors       = ["TODO: Write your name"]
+  spec.authors       = ["Carsten Zimmermann"]
   spec.email         = ["cz@aegisnet.de"]
 
-  spec.summary       = %q{TODO: Write a short summary, because Rubygems requires one.}
-  spec.description   = %q{TODO: Write a longer description or delete this line.}
-  spec.homepage      = "TODO: Put your gem's website or public repo URL here."
+  spec.summary       = %q{Provides a standalone mock result for Solr searches}
+  spec.description   = %q{}
+  spec.homepage      = "https://github.com/Absolventa/sunspot-null_result"
   spec.license       = "MIT"
 
   # Prevent pushing this gem to RubyGems.org by setting 'allowed_push_host', or
