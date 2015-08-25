@@ -5,6 +5,19 @@ RSpec.describe Sunspot::NullResult do
     expect(Sunspot::NullResult::VERSION).not_to be nil
   end
 
+  let(:collection) { [double, double] }
+
+  describe 'its constructor' do
+    it 'does not require an argument' do
+      expect(described_class.new).to be_instance_of described_class
+    end
+
+    it 'sets the collection' do
+      subject = described_class.new collection
+      expect(subject.collection).to eql collection
+    end
+  end
+
   shared_examples_for 'returns a paginated enumerable' do |method|
     subject { described_class.new.send(method) }
 
@@ -25,12 +38,37 @@ RSpec.describe Sunspot::NullResult do
     end
   end
 
+  shared_examples_for 'returns injected results list' do |method|
+    subject { described_class.new(collection).send(method) }
+
+    let(:size) { collection.size }
+
+    it 'returns a total amount of collection objects' do
+      expect(subject.total_count).to eql size
+    end
+
+    it 'returns a total page count of 1' do
+      expect(subject.total_pages).to eql 1
+    end
+
+    it 'returns the current page as 1' do
+      expect(subject.current_page).to eql 1
+    end
+
+    it 'returns the limit value as 1' do
+      expect(subject.limit_value).to eql 1
+    end
+
+  end
+
   describe '#hits' do
     it_behaves_like 'returns a paginated enumerable', :hits
+    it_behaves_like 'returns injected results list',  :hits
   end
 
   describe '#results' do
     it_behaves_like 'returns a paginated enumerable', :results
+    it_behaves_like 'returns injected results list',  :results
   end
 
 end

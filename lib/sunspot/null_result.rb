@@ -2,10 +2,20 @@ require "sunspot/null_result/version"
 
 module Sunspot
   class NullResult
+    attr_reader :collection
+
+    def initialize(collection = [])
+      @collection = collection
+    end
 
     class PaginatedNullArray < Array
+
+      def initialize(*items)
+        @items = Array(items).flatten
+      end
+
       def total_count
-        0
+        @items.size
       end
 
       def current_page
@@ -22,11 +32,11 @@ module Sunspot
     end
 
     def hits
-      PaginatedNullArray.new
+      PaginatedNullArray.new(collection)
     end
 
     def results
-      PaginatedNullArray.new
+      PaginatedNullArray.new(collection)
     end
 
   end
