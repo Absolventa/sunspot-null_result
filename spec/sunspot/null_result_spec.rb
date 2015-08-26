@@ -51,12 +51,20 @@ RSpec.describe Sunspot::NullResult do
       expect(subject.total_pages).to eql 1
     end
 
+    it 'returns a num page count of 1' do
+      expect(subject.num_pages).to eql 1
+    end
+
     it 'returns the current page as 1' do
       expect(subject.current_page).to eql 1
     end
 
     it 'returns the limit value as 1' do
       expect(subject.limit_value).to eql 1
+    end
+
+    it 'returns the per_page value as 1' do
+      expect(subject.per_page).to eql 1
     end
 
     it 'yields each item in the collection' do

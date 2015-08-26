@@ -21,10 +21,12 @@ module Sunspot
       def total_pages
         1
       end
+      alias num_pages total_pages
 
-      def limit_value
+      def per_page
         1
       end
+      alias limit_value per_page
     end
 
     def hits
