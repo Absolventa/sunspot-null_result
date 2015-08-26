@@ -12,13 +12,7 @@ module Sunspot
     # https://github.com/sunspot/sunspot/blob/master/sunspot_rails/lib/sunspot/rails/stub_session_proxy.rb
     class PaginatedNullArray < Array
 
-      def initialize(*items)
-        @items = Array(items).flatten
-      end
-
-      def total_count
-        @items.size
-      end
+      alias total_count size
 
       def current_page
         1

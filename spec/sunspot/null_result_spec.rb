@@ -59,6 +59,11 @@ RSpec.describe Sunspot::NullResult do
       expect(subject.limit_value).to eql 1
     end
 
+    it 'yields each item in the collection' do
+      expect { |b| subject.each(&b) }.to \
+        yield_successive_args(*collection)
+    end
+
   end
 
   describe '#hits' do
