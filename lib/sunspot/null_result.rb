@@ -28,6 +28,12 @@ module Sunspot
       end
       alias limit_value per_page
 
+      def previous_page
+      end
+
+      def next_page
+      end
+
       def first_page?
         true
       end

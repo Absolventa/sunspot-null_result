@@ -76,6 +76,14 @@ RSpec.describe Sunspot::NullResult do
     it { is_expected.to be_last_page }
     it { is_expected.not_to be_out_of_bounds }
 
+    it 'has no previous page' do
+      expect(subject.previous_page).to be_nil
+    end
+
+    it 'has no next page' do
+      expect(subject.next_page).to be_nil
+    end
+
   end
 
   describe '#hits' do
