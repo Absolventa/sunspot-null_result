@@ -76,6 +76,10 @@ RSpec.describe Sunspot::NullResult do
     it { is_expected.to be_last_page }
     it { is_expected.not_to be_out_of_bounds }
 
+    it 'has an offset value of 0' do
+      expect(subject.offset).to eql 0
+    end
+
     it 'has no previous page' do
       expect(subject.previous_page).to be_nil
     end

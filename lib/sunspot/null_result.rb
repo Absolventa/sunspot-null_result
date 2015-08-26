@@ -8,7 +8,7 @@ module Sunspot
       @collection = collection
     end
 
-    # OPTIMIZE: Add other methods listed in
+    # Implements the interface of
     # https://github.com/sunspot/sunspot/blob/master/sunspot_rails/lib/sunspot/rails/stub_session_proxy.rb
     class PaginatedNullArray < Array
 
@@ -44,6 +44,10 @@ module Sunspot
 
       def out_of_bounds?
         false
+      end
+
+      def offset
+        0
       end
     end
 
