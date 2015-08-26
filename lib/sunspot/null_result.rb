@@ -27,6 +27,18 @@ module Sunspot
         1
       end
       alias limit_value per_page
+
+      def first_page?
+        true
+      end
+
+      def last_page?
+        true
+      end
+
+      def out_of_bounds?
+        false
+      end
     end
 
     def hits

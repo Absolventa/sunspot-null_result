@@ -72,6 +72,10 @@ RSpec.describe Sunspot::NullResult do
         yield_successive_args(*collection)
     end
 
+    it { is_expected.to be_first_page }
+    it { is_expected.to be_last_page }
+    it { is_expected.not_to be_out_of_bounds }
+
   end
 
   describe '#hits' do
