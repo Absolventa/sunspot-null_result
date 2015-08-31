@@ -37,7 +37,7 @@ RSpec.describe 'stubbed Solr result' do
   end
 
   context 'with some records' do
-    let(:record) { [MyModel.new, MyModel.new] }
+    let(:records) { [MyModel.new, MyModel.new] }
     # …
   end
 end
