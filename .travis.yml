@@ -1,4 +1,10 @@
 language: ruby
+sudo: false
 rvm:
-  - 2.2.2
+- 2.2.2
 before_install: gem install bundler -v 1.10.5
+cache:
+  bundler: true
+notifications:
+  webhooks:
+    secure: bp5A92/Do0Ux/LkWxmnM3XlG7JjjPfodiwXgpbPsnKKhA6gLd3uMl9n3HADczI3fiMdyM0bcUme4ULN6uMa4H1Ofss6VD5MW/1hqZvVkUwnu4YsCbevAUs+wcaoJwlzjzvX7LiKUvNFk9oJoFgDItVrKrekD+BuU2vtfzcJq/cxY6+XUrvwjAdTLJmeNo7jcRuVTdkZ4938URSlQp53Ivs47XS26peJWDwvKEW2Nfc8r6Ts7JzFMpf8pZSoinlNUL7zEM3+DyvPjA+UNIx0CwL0JMTDLIhloGePlNwoXclurt4+UOMhLgAlCWDUxBJ18zhDGrUEfFSDz0zjzLYpKTqGKY3fB4YPLISJ402msFmqVVdQotZJ/y5w+bvyiRDktnjHCTdONSzW2n1dtKTUGhnenYfC+btZVuik9mWsNoemCLsC8XXMY/JOywEkdLDeoe2ksiTJPqpW/IyCkZX+qbkwRi5sYlhm+7/8GjDqz8F40aM5qn24y6h2sF+z0vnj4pioTa+6fPjIC7T8rv+VeCpiBlffUVqB6TveR3Wv2O89xQllZNDwpKdCxbNqJQflcM/xb4kBo8nkAWXqPOk43zrSOHTmyBjod7wZRHq1zdsp1+PCBVT2XAXk+JaxSWFWs7jHsa+PCESIs01LMoScfgyQ9LXqcMvjQ6Kzzgre9ktc=
