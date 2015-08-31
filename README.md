@@ -64,6 +64,8 @@ end
 
 ### HEAD (not yet released)
 
+### v0.1.0
+* Initial working release
 
 
 ## License
