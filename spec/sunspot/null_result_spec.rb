@@ -5,7 +5,7 @@ RSpec.describe Sunspot::NullResult do
     expect(Sunspot::NullResult::VERSION).not_to be nil
   end
 
-  let(:collection) { [double, double] }
+  let(:collection) { [double] }
 
   describe 'its constructor' do
     it 'does not require an argument' do
@@ -90,14 +90,37 @@ RSpec.describe Sunspot::NullResult do
 
   end
 
+  shared_examples_for 'allows injection of pagination options' do |method|
+    let(:collection) { 3.times.map { double } }
+
+    context 'setting per_page' do
+      let(:per_page) { 2 }
+      subject { described_class.new(collection, per_page: per_page).send(method) }
+      it { expect(subject.per_page).to eql per_page }
+
+      it { expect(subject.total_pages).to eql 2 }
+    end
+
+    context 'setting the current_page' do
+      let(:current_page) { 2 }
+      subject { described_class.new(collection, current_page: current_page).send(method) }
+      it { expect(subject.current_page).to eql current_page }
+
+      it { expect(subject.previous_page).to eql (current_page-1) }
+      it { expect(subject.next_page).to eql (current_page+1) }
+    end
+  end
+
   describe '#hits' do
     it_behaves_like 'returns a paginated enumerable', :hits
     it_behaves_like 'returns injected results list',  :hits
+    it_behaves_like 'allows injection of pagination options', :hits
   end
 
   describe '#results' do
     it_behaves_like 'returns a paginated enumerable', :results
     it_behaves_like 'returns injected results list',  :results
+    it_behaves_like 'allows injection of pagination options', :results
   end
 
 end
