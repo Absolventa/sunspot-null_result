@@ -5,7 +5,7 @@ RSpec.describe Sunspot::NullResult do
     expect(Sunspot::NullResult::VERSION).not_to be nil
   end
 
-  let(:collection) { [double, double] }
+  let(:collection) { [double] }
 
   describe 'its constructor' do
     it 'does not require an argument' do
@@ -93,14 +93,19 @@ RSpec.describe Sunspot::NullResult do
   shared_examples_for 'allows injection of pagination options' do |method|
     let(:collection) { 3.times.map { double } }
 
-    context 'setting the current_page' do
-      let(:current_page) { 2 }
+    context 'setting per_page' do
+      let(:per_page) { 2 }
+      subject { described_class.new(collection, per_page: per_page).send(method) }
+      it { expect(subject.per_page).to eql per_page }
 
-      subject { described_class.new(collection, current_page: current_page).send(method) }
-
-      it { expect(subject.current_page).to eql current_page }
+      it { expect(subject.total_pages).to eql 2 }
     end
 
+    context 'setting the current_page' do
+      let(:current_page) { 2 }
+      subject { described_class.new(collection, current_page: current_page).send(method) }
+      it { expect(subject.current_page).to eql current_page }
+    end
   end
 
   describe '#hits' do

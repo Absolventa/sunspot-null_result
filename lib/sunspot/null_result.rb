@@ -12,24 +12,22 @@ module Sunspot
     # Implements the interface of
     # https://github.com/sunspot/sunspot/blob/master/sunspot_rails/lib/sunspot/rails/stub_session_proxy.rb
     class PaginatedNullArray < Array
-      attr_reader :current_page
+      attr_reader :current_page, :per_page
 
-      def initialize(collection, current_page: 1)
+      def initialize(collection, current_page: 1, per_page: 1)
         super(collection)
         @current_page = current_page
+        @per_page     = per_page
       end
 
       alias total_count size
+      alias limit_value per_page
 
       def total_pages
-        1
+        [(size/per_page.to_f).ceil, 1].max
       end
       alias num_pages total_pages
 
-      def per_page
-        1
-      end
-      alias limit_value per_page
 
       def previous_page
       end
