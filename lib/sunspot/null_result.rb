@@ -2,21 +2,24 @@ require "sunspot/null_result/version"
 
 module Sunspot
   class NullResult
-    attr_reader :collection
+    attr_reader :collection, :options
 
-    def initialize(collection = [])
-      @collection = collection
+    def initialize(*collection, **options)
+      @collection = collection.flatten
+      @options    = options
     end
 
     # Implements the interface of
     # https://github.com/sunspot/sunspot/blob/master/sunspot_rails/lib/sunspot/rails/stub_session_proxy.rb
     class PaginatedNullArray < Array
+      attr_reader :current_page
+
+      def initialize(collection, current_page: 1)
+        super(collection)
+        @current_page = current_page
+      end
 
       alias total_count size
-
-      def current_page
-        1
-      end
 
       def total_pages
         1
@@ -52,11 +55,11 @@ module Sunspot
     end
 
     def hits
-      PaginatedNullArray.new(collection)
+      PaginatedNullArray.new(collection, options)
     end
 
     def results
-      PaginatedNullArray.new(collection)
+      PaginatedNullArray.new(collection, options)
     end
 
   end

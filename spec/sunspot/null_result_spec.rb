@@ -90,14 +90,29 @@ RSpec.describe Sunspot::NullResult do
 
   end
 
+  shared_examples_for 'allows injection of pagination options' do |method|
+    let(:collection) { 3.times.map { double } }
+
+    context 'setting the current_page' do
+      let(:current_page) { 2 }
+
+      subject { described_class.new(collection, current_page: current_page).send(method) }
+
+      it { expect(subject.current_page).to eql current_page }
+    end
+
+  end
+
   describe '#hits' do
     it_behaves_like 'returns a paginated enumerable', :hits
     it_behaves_like 'returns injected results list',  :hits
+    it_behaves_like 'allows injection of pagination options', :hits
   end
 
   describe '#results' do
     it_behaves_like 'returns a paginated enumerable', :results
     it_behaves_like 'returns injected results list',  :results
+    it_behaves_like 'allows injection of pagination options', :results
   end
 
 end
