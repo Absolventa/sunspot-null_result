@@ -105,6 +105,9 @@ RSpec.describe Sunspot::NullResult do
       let(:current_page) { 2 }
       subject { described_class.new(collection, current_page: current_page).send(method) }
       it { expect(subject.current_page).to eql current_page }
+
+      it { expect(subject.previous_page).to eql (current_page-1) }
+      it { expect(subject.next_page).to eql (current_page+1) }
     end
   end
 

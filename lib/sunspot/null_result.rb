@@ -30,9 +30,11 @@ module Sunspot
 
 
       def previous_page
+        (current_page-1) if current_page > 1
       end
 
       def next_page
+        (current_page+1) if total_pages > current_page
       end
 
       def first_page?
