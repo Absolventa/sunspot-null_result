@@ -64,6 +64,9 @@ end
 
 ### HEAD (not yet released)
 
+### v0.2.0
+* Allow setting of pagination options and calculate dependent values accordingly
+
 ### v0.1.0
 * Initial working release
 
