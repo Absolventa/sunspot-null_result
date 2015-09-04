@@ -67,7 +67,7 @@ module Sunspot
     end
 
     def groups
-      GroupedCollection.new(collection, options[:group_by]).to_a
+      GroupedCollection.new(collection, group_by).to_a
     end
 
   end
