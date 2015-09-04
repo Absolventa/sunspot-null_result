@@ -34,33 +34,24 @@ RSpec.describe 'stubbed Solr result' do
   context 'with no records' do
     let(:records) { [] }
     # …
+
+    it 'supports grouping' do
+      # …
+      expect(search.group(:my_attribute)).to eql []
+    end
   end
 
   context 'with some records' do
     let(:records) { [MyModel.new, MyModel.new] }
     # …
+
+    it 'supports grouping' do
+      # …
+      expect(search.group(:my_attribute)).not_to be_empty
+    end
   end
 end
 ```
-Example using grouped search:
-
-```ruby
-RSpec.describe 'stubbed grouped Solr result' do
-  let(:grouped_search) { Sunspot::NullResult.new(records, group_by: :category_id) }
-  before { allow(MyModel).to receive_message_chain('search.group').and_return(grouped_search) }
-
-  context 'with no records' do
-    let(:records) { [] }
-    # …
-  end
-
-  context 'with some records' do
-    let(:records) { [MyModel.new, MyModel.new] }
-    # …
-  end
-end
-```
-
 
 Rescue case for unavailable Solr server, e.g. Websolr having issues.
 

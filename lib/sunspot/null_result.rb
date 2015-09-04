@@ -7,10 +7,10 @@ module Sunspot
   class NullResult
     attr_reader :collection, :options, :group_by
 
-    def initialize(*collection, group_by: nil, **options)
+    def initialize(*collection, **options)
       @collection = collection.flatten
-      @group_by   = group_by
       @options    = options
+      @group_by   = nil
     end
 
     # Implements the interface of
@@ -64,6 +64,11 @@ module Sunspot
 
     def results
       PaginatedNullArray.new(collection, options)
+    end
+
+    def group(group)
+      @group_by = group
+      self
     end
 
     def groups

@@ -21,11 +21,6 @@ RSpec.describe Sunspot::NullResult do
       it 'leaves group_by blank' do
         expect(subject.group_by).to be_nil
       end
-
-      it 'sets the group_by' do
-        subject = described_class.new collection, group_by: :foobar
-        expect(subject.group_by).to eql :foobar
-      end
     end
   end
 
@@ -132,6 +127,27 @@ RSpec.describe Sunspot::NullResult do
     it_behaves_like 'returns a paginated enumerable', :results
     it_behaves_like 'returns injected results list',  :results
     it_behaves_like 'allows injection of pagination options', :results
+  end
+
+  describe '#group' do
+    let(:collection) do
+      %w(one two).map { |group| Struct.new(:foobar, :id).new(group, '_') }
+    end
+
+    subject { described_class.new(collection) }
+
+    it 'sets the group_by' do
+      expect { subject.group(:foobar) }.
+        to change { subject.group_by }.to :foobar
+    end
+
+    it 'returns itself' do
+      expect(subject.group(:foobar)).to eql subject
+    end
+
+    it 'returns a grouped result' do
+      expect(subject.group(:foobar).groups).not_to be_empty
+    end
   end
 
   describe '#groups' do
