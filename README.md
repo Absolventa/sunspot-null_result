@@ -24,7 +24,7 @@ Or install it yourself as:
 
 ## Usage
 
-RSpec case:
+RSpec examples:
 
 ```ruby
 RSpec.describe 'stubbed Solr result' do
@@ -34,11 +34,21 @@ RSpec.describe 'stubbed Solr result' do
   context 'with no records' do
     let(:records) { [] }
     # …
+
+    it 'supports grouping' do
+      # …
+      expect(search.group(:my_attribute)).to eql []
+    end
   end
 
   context 'with some records' do
     let(:records) { [MyModel.new, MyModel.new] }
     # …
+
+    it 'supports grouping' do
+      # …
+      expect(search.group(:my_attribute)).not_to be_empty
+    end
   end
 end
 ```
@@ -63,6 +73,9 @@ end
 ## Changelog
 
 ### HEAD (not yet released)
+
+### v0.3.0
+* Support Sunspot grouping
 
 ### v0.2.0
 * Allow setting of pagination options and calculate dependent values accordingly

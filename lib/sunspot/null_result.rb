@@ -1,12 +1,16 @@
 require "sunspot/null_result/version"
+require "sunspot/null_result/grouped_collection"
+require "sunspot/null_result/group"
+require "sunspot/null_result/hit"
 
 module Sunspot
   class NullResult
-    attr_reader :collection, :options
+    attr_reader :collection, :options, :group_by
 
     def initialize(*collection, **options)
       @collection = collection.flatten
       @options    = options
+      @group_by   = nil
     end
 
     # Implements the interface of
@@ -60,6 +64,15 @@ module Sunspot
 
     def results
       PaginatedNullArray.new(collection, options)
+    end
+
+    def group(group)
+      @group_by = group
+      self
+    end
+
+    def groups
+      GroupedCollection.new(collection, group_by).to_a
     end
 
   end
