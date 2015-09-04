@@ -1,5 +1,7 @@
 require "sunspot/null_result/version"
 require "sunspot/null_result/grouped_collection"
+require "sunspot/null_result/group"
+require "sunspot/null_result/hit"
 
 module Sunspot
   class NullResult
@@ -65,7 +67,7 @@ module Sunspot
     end
 
     def groups
-      []
+      GroupedCollection.new(collection, options[:group_by]).to_a
     end
 
   end

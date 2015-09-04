@@ -138,5 +138,13 @@ RSpec.describe Sunspot::NullResult do
     it 'returns an empty list' do
       expect(subject.groups).to eql([])
     end
+
+    context 'with an :group_by option' do
+      subject { described_class.new(collection, group_by: :itself) }
+
+      it 'still is an array' do
+        expect(subject.groups).to be_kind_of Array
+      end
+    end
   end
 end
