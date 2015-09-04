@@ -16,11 +16,23 @@ RSpec.describe Sunspot::NullResult::GroupedCollection do
   describe '#to_a' do
     context 'with group_by specified' do
       let(:attribute) { :foobar }
-      subject { described_class.new(collection, attribute) }
+      subject { described_class.new(collection, attribute).to_a }
 
       it 'groups its collection by given attribute' do
-        expect(subject.to_a).to be_kind_of Array
-        expect(subject.to_a).to match_array collection.group_by(&attribute).values
+        expect(subject).to be_kind_of Array
+        expect(subject).to match_array collection.group_by(&attribute).values
+      end
+
+      RSpec::Matchers.define :be_sunspot_group_result_compliant do
+        match do |actual|
+          [:solr_docs, :hits].all? { |meth| actual.respond_to? meth }
+        end
+      end
+
+      it 'implements grouped sunspot result interface' do
+        subject.each do |item|
+          expect(item).to be_sunspot_group_result_compliant
+        end
       end
     end
   end
