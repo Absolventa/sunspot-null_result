@@ -12,7 +12,11 @@ module Sunspot
       end
 
       def to_a
-        collection.group_by(&group_by).values
+        grouped = collection.group_by(&group_by)
+
+        grouped.keys.map do |group_key|
+          Group.new(group_key, grouped[group_key], collection.first.class.to_s)
+        end
       end
 
       def each(*args, &block)

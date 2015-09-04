@@ -24,10 +24,7 @@ RSpec.describe Sunspot::NullResult::GroupedCollection do
     context 'with group_by specified' do
       let(:attribute) { :foobar }
 
-      it 'groups its collection by given attribute' do
-        expect(subject).to be_kind_of Array
-        expect(subject).to match_array collection.group_by(&attribute).values
-      end
+      it { expect(subject).to be_kind_of Array }
 
       RSpec::Matchers.define :be_sunspot_group_result_compliant do
         match do |actual|
