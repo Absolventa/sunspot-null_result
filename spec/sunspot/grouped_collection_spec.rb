@@ -25,7 +25,15 @@ RSpec.describe Sunspot::NullResult::GroupedCollection do
 
       RSpec::Matchers.define :be_sunspot_group_result_compliant do
         match do |actual|
-          [:solr_docs, :hits].all? { |meth| actual.respond_to? meth }
+          @missing_methods = []
+          [:solr_docs, :hits].each do |meth|
+            @missing_methods << meth unless actual.respond_to? meth
+          end
+          @missing_methods.empty?
+        end
+
+        failure_message do |actual|
+          "#{actual} does not respond to these methods: #{@missing_methods.inspect}"
         end
       end
 
