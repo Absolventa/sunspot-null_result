@@ -2,10 +2,11 @@ require "sunspot/null_result/version"
 
 module Sunspot
   class NullResult
-    attr_reader :collection, :options
+    attr_reader :collection, :options, :group_by
 
-    def initialize(*collection, **options)
+    def initialize(*collection, group_by: nil, **options)
       @collection = collection.flatten
+      @group_by   = group_by
       @options    = options
     end
 
@@ -60,6 +61,10 @@ module Sunspot
 
     def results
       PaginatedNullArray.new(collection, options)
+    end
+
+    def groups
+      []
     end
 
   end
