@@ -83,6 +83,9 @@ end
 
 ### HEAD (not yet released)
 
+### v0.3.0
+* Support Sunspot grouping
+
 ### v0.2.0
 * Allow setting of pagination options and calculate dependent values accordingly
 
