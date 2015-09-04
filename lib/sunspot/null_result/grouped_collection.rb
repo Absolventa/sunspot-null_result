@@ -15,7 +15,7 @@ module Sunspot
         grouped = collection.group_by(&group_by)
 
         grouped.keys.map do |group_key|
-          Group.new(group_key, grouped[group_key], collection.first.class.to_s)
+          Group.new(group_key, grouped[group_key])
         end
       end
 

@@ -2,14 +2,13 @@ require 'spec_helper'
 
 RSpec.describe Sunspot::NullResult::Group do
 
-  let(:collection_item_class_name) { 'Monkey'   }
-  let(:collection_primary_keys)    { ['a', 'b'] }
+  let(:collection) { [1, 2].map { |id| klass.new('foo', id) } }
 
-  subject { described_class.new(42, collection_primary_keys, collection_item_class_name) }
+  subject { described_class.new(42, collection) }
 
   describe '#solr_docs' do
     it 'build solr document list as expected' do
-      expect(subject.solr_docs).to eql ['Monkey a', 'Monkey b']
+      expect(subject.solr_docs).to eql ['Struct::Monkey 1', 'Struct::Monkey 2']
     end
   end
 
@@ -34,4 +33,9 @@ RSpec.describe Sunspot::NullResult::Group do
       end
     end
   end
+
+  def klass
+    @klass ||= Struct.new('Monkey', :foobar, :id)
+  end
+
 end

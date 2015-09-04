@@ -1,13 +1,13 @@
 module Sunspot
   class NullResult
-    class Group < Struct.new(:value, :primary_keys, :collection_item_class_name)
+    class Group < Struct.new(:value, :collection)
 
       def solr_docs
-        primary_keys.map { |id| "#{collection_item_class_name.to_s} #{id}" }
+        collection.map { |item| "#{item.class.to_s} #{item.id}" }
       end
 
       def hits
-        primary_keys.map { |id| Hit.new(id) }
+        collection.map { |item| Hit.new item.id }
       end
 
     end
