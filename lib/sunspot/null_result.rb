@@ -1,4 +1,5 @@
 require "sunspot/null_result/version"
+require "sunspot/null_result/grouped_collection"
 
 module Sunspot
   class NullResult
