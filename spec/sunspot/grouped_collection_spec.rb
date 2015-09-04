@@ -5,18 +5,24 @@ RSpec.describe Sunspot::NullResult::GroupedCollection do
   let(:values) { %w(one two three) }
   let(:collection) { (values*2).map { |value| klass.new(value) }.shuffle }
 
-  describe 'its constructor' do
-    context 'without group_by specified' do
-      it 'returns empty list' do
-        expect(described_class.new(collection)).to eql([])
-      end
-    end
+  describe 'its delegation behavior' do
+    subject { described_class.new(collection) }
+    it { is_expected.to respond_to(:each); subject.each { |i| } }
   end
 
   describe '#to_a' do
+    subject { described_class.new(collection, attribute).to_a }
+
+    context 'without group_by specified' do
+      let(:attribute) {}
+
+      it 'returns empty list' do
+        expect(subject).to be_empty
+      end
+    end
+
     context 'with group_by specified' do
       let(:attribute) { :foobar }
-      subject { described_class.new(collection, attribute).to_a }
 
       it 'groups its collection by given attribute' do
         expect(subject).to be_kind_of Array
