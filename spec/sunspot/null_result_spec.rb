@@ -152,14 +152,31 @@ RSpec.describe Sunspot::NullResult do
 
   describe '#groups' do
     it 'returns an empty list' do
-      expect(subject.groups).to eql([])
+      expect(subject.groups).to be_empty
+    end
+
+    it 'knows about current_page' do
+      expect(subject.groups.current_page).to be_an Integer
+    end
+
+    it 'knows about next_page' do
+      expect(subject.groups.next_page).to be_an Integer
+    end
+
+    it 'knows about prev_page' do
+      expect(subject.groups.prev_page).to be_an Integer
+    end
+
+    it 'knows about total_pages' do
+      expect(subject.groups.total_pages).to be_an Integer
     end
 
     context 'with an :group_by option' do
-      subject { described_class.new(collection, group_by: :itself) }
+      subject { described_class.new(collection) }
+      before { subject.group(:itself) }
 
       it 'still is an array' do
-        expect(subject.groups).to be_kind_of Array
+        expect(subject.groups).to be_kind_of Enumerable
       end
     end
   end

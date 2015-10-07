@@ -71,7 +71,8 @@ module Sunspot
     end
 
     def groups
-      GroupedCollection.new(collection, group_by).to_a
+      GroupedCollection.new(collection: collection, group_by: group_by, current_page: results.current_page, total_pages: results.total_pages)
+    end
 
     def matches
       results.size

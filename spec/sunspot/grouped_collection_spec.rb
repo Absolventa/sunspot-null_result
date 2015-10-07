@@ -6,12 +6,12 @@ RSpec.describe Sunspot::NullResult::GroupedCollection do
   let(:collection) { (values*2).map { |value| klass.new(value) }.shuffle }
 
   describe 'its delegation behavior' do
-    subject { described_class.new(collection) }
+    subject { described_class.new(collection: collection) }
     it { is_expected.to respond_to(:each); subject.each { |i| } }
   end
 
   describe '#to_a' do
-    subject { described_class.new(collection, attribute).to_a }
+    subject { described_class.new(collection: collection, group_by: attribute).to_a }
 
     context 'without group_by specified' do
       let(:attribute) {}
