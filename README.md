@@ -74,6 +74,9 @@ end
 
 ### HEAD (not yet released)
 
+### v0.3.1
+* Extend sunspot groups by useful details, e.g. pagination information
+
 ### v0.3.0
 * Support Sunspot grouping
 
