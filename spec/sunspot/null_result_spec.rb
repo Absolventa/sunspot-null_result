@@ -163,4 +163,10 @@ RSpec.describe Sunspot::NullResult do
       end
     end
   end
+
+  describe '#matches' do
+    it 'returns total count of (possibly child) elements' do
+      expect(subject.matches).to eql 0
+    end
+  end
 end

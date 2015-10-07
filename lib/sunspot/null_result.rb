@@ -32,7 +32,6 @@ module Sunspot
       end
       alias num_pages total_pages
 
-
       def previous_page
         (current_page-1) if current_page > 1
       end
@@ -73,6 +72,9 @@ module Sunspot
 
     def groups
       GroupedCollection.new(collection, group_by).to_a
+
+    def matches
+      results.size
     end
 
   end
