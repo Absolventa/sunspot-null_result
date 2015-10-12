@@ -32,7 +32,7 @@ module Sunspot
       end
       alias num_pages total_pages
 
-      def previous_page
+      def prev_page
         (current_page-1) if current_page > 1
       end
 

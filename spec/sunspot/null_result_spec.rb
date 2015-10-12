@@ -87,7 +87,7 @@ RSpec.describe Sunspot::NullResult do
     end
 
     it 'has no previous page' do
-      expect(subject.previous_page).to be_nil
+      expect(subject.prev_page).to be_nil
     end
 
     it 'has no next page' do
@@ -112,7 +112,7 @@ RSpec.describe Sunspot::NullResult do
       subject { described_class.new(collection, current_page: current_page).send(method) }
       it { expect(subject.current_page).to eql current_page }
 
-      it { expect(subject.previous_page).to eql (current_page-1) }
+      it { expect(subject.prev_page).to eql (current_page-1) }
       it { expect(subject.next_page).to eql (current_page+1) }
     end
   end
