@@ -74,6 +74,9 @@ end
 
 ### HEAD (not yet released)
 
+### v0.4.1
+* Minor fix for accessing previous result page 
+
 ### v0.4.0
 * Extend sunspot groups by useful details, e.g. pagination information
 
