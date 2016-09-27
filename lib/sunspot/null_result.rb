@@ -1,3 +1,4 @@
+# frozen_string_literal: true
 require "sunspot/null_result/version"
 require "sunspot/null_result/grouped_collection"
 require "sunspot/null_result/group"

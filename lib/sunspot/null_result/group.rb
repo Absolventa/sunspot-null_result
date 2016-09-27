@@ -1,3 +1,4 @@
+# frozen_string_literal: true
 module Sunspot
   class NullResult
     class Group < Struct.new(:value, :collection)
