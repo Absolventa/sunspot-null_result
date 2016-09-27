@@ -74,8 +74,13 @@ end
 
 ### HEAD (not yet released)
 
+### v0.5.0
+* Build on newer MRI version
+* Add Sunspot::NullResult#total and #facet
+* Use frozen_string_literal magic comment for MRI 2.3.x
+
 ### v0.4.1
-* Minor fix for accessing previous result page 
+* Minor fix for accessing previous result page
 
 ### v0.4.0
 * Extend sunspot groups by useful details, e.g. pagination information
