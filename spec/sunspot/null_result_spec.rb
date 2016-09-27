@@ -186,4 +186,10 @@ RSpec.describe Sunspot::NullResult do
       expect(subject.matches).to eql 0
     end
   end
+
+  describe '#facet' do
+    it 'returns a Facet instance' do
+      expect(subject.facet(:foobar)).to be_instance_of Sunspot::NullResult::Facet
+    end
+  end
 end

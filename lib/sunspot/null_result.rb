@@ -2,6 +2,7 @@ require "sunspot/null_result/version"
 require "sunspot/null_result/grouped_collection"
 require "sunspot/null_result/group"
 require "sunspot/null_result/hit"
+require "sunspot/null_result/facet"
 
 module Sunspot
   class NullResult
@@ -76,6 +77,10 @@ module Sunspot
 
     def matches
       results.size
+    end
+
+    def facet(*)
+      Sunspot::NullResult::Facet.new
     end
 
   end
