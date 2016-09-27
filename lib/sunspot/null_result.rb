@@ -83,5 +83,9 @@ module Sunspot
       Sunspot::NullResult::Facet.new
     end
 
+    def total
+      collection.size
+    end
+
   end
 end

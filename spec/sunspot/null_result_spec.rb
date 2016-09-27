@@ -192,4 +192,18 @@ RSpec.describe Sunspot::NullResult do
       expect(subject.facet(:foobar)).to be_instance_of Sunspot::NullResult::Facet
     end
   end
+
+  describe '#total' do
+    it { expect(subject.total).to eql 0 }
+
+    context 'with injected results' do
+      let(:collection) { 3.times.map { double } }
+
+      subject { described_class.new collection }
+
+      it 'returns the size of the list of results' do
+        expect(subject.total).to eql 3
+      end
+    end
+  end
 end
