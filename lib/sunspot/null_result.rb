@@ -20,10 +20,11 @@ module Sunspot
     class PaginatedNullArray < Array
       attr_reader :per_page
 
-      def initialize(collection, current_page: 1, per_page: 1)
+      def initialize(collection, current_page: 1, per_page: 1, offset: nil)
         super(collection)
         @current_page = current_page.to_i
         @per_page     = per_page.to_i
+        @offset       = offset
         @_collection  = collection
       end
 
@@ -76,7 +77,7 @@ module Sunspot
       end
 
       def offset
-        0
+        @offset || 0
       end
     end
 

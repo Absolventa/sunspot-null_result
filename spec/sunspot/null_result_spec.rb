@@ -115,6 +115,12 @@ RSpec.describe Sunspot::NullResult do
       it { expect(subject.prev_page).to eql (current_page-1) }
       it { expect(subject.next_page).to eql (current_page+1) }
     end
+
+    context 'setting the offset' do
+      let(:offset) { 42 }
+      subject { described_class.new(collection, offset: offset).send(method) }
+      it { expect(subject.offset).to eql offset }
+    end
   end
 
   shared_examples_for 'detects and honours kaminari-compatible data structures' do |method|
