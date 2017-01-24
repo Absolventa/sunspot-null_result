@@ -133,6 +133,10 @@ RSpec.describe Sunspot::NullResult do
         def total_count
           :total_count_from_injected_collection
         end
+
+        def current_page
+          :current_page_from_injected_collection
+        end
       }.new(entries)
     end
 
@@ -147,6 +151,13 @@ RSpec.describe Sunspot::NullResult do
       subject { described_class.new(collection).send(method) }
       it 'returns the total count from the collection' do
         expect(subject.total_count).to eql :total_count_from_injected_collection
+      end
+    end
+
+    describe '#current_page' do
+      subject { described_class.new(collection).send(method) }
+      it 'returns the current page from the collection' do
+        expect(subject.current_page).to eql :current_page_from_injected_collection
       end
     end
 
