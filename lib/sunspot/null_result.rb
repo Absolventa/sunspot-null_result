@@ -22,8 +22,8 @@ module Sunspot
 
       def initialize(collection, current_page: 1, per_page: 1)
         super(collection)
-        @current_page = current_page
-        @per_page     = per_page
+        @current_page = current_page.to_i
+        @per_page     = per_page.to_i
         @_collection  = collection
       end
 
