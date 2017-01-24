@@ -115,18 +115,72 @@ RSpec.describe Sunspot::NullResult do
       it { expect(subject.prev_page).to eql (current_page-1) }
       it { expect(subject.next_page).to eql (current_page+1) }
     end
+
+    context 'setting the offset' do
+      let(:offset) { 42 }
+      subject { described_class.new(collection, offset: offset).send(method) }
+      it { expect(subject.offset).to eql offset }
+    end
+  end
+
+  shared_examples_for 'detects and honours kaminari-compatible data structures' do |method|
+    let(:collection) do
+      entries = 3.times.map { double }
+      # Mime a collection that has pagination methods mixed in
+      Class.new(Array) {
+        def initialize(entries)
+          super(entries)
+        end
+
+        def total_pages
+          :total_pages_from_injected_collection
+        end
+
+        def total_count
+          :total_count_from_injected_collection
+        end
+
+        def current_page
+          :current_page_from_injected_collection
+        end
+      }.new(entries)
+    end
+
+    describe '#total_pages' do
+      subject { described_class.new(collection).send(method) }
+      it 'returns the total pages from the collection' do
+        expect(subject.total_pages).to eql :total_pages_from_injected_collection
+      end
+    end
+
+    describe '#total_count' do
+      subject { described_class.new(collection).send(method) }
+      it 'returns the total count from the collection' do
+        expect(subject.total_count).to eql :total_count_from_injected_collection
+      end
+    end
+
+    describe '#current_page' do
+      subject { described_class.new(collection).send(method) }
+      it 'returns the current page from the collection' do
+        expect(subject.current_page).to eql :current_page_from_injected_collection
+      end
+    end
+
   end
 
   describe '#hits' do
     it_behaves_like 'returns a paginated enumerable', :hits
     it_behaves_like 'returns injected results list',  :hits
     it_behaves_like 'allows injection of pagination options', :hits
+    it_behaves_like 'detects and honours kaminari-compatible data structures', :hits
   end
 
   describe '#results' do
     it_behaves_like 'returns a paginated enumerable', :results
     it_behaves_like 'returns injected results list',  :results
     it_behaves_like 'allows injection of pagination options', :results
+    it_behaves_like 'detects and honours kaminari-compatible data structures', :results
   end
 
   describe '#group' do
