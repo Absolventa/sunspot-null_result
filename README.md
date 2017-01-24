@@ -1,4 +1,4 @@
-# Sunspot::NullResult [![Build Status](https://travis-ci.org/Absolventa/sunspot_null-result.svg?branch=master)](https://travis-ci.org/Absolventa/sunspot_null-result)
+# Sunspot::NullResult [![Build Status](https://travis-ci.org/Absolventa/sunspot-null_result.svg?branch=master)](https://travis-ci.org/Absolventa/sunspot-null_result)
 
 Interface taken from `Sunspot::Rails::StubSessionProxy::PaginatesCollection` of
 [sunspot-rails](https://github.com/sunspot/sunspot/tree/master/sunspot_rails).
