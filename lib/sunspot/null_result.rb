@@ -9,8 +9,8 @@ module Sunspot
   class NullResult
     attr_reader :collection, :options, :group_by
 
-    def initialize(*collection, **options)
-      @collection = collection.flatten
+    def initialize(collection = [], **options)
+      @collection = collection
       @options    = options
       @group_by   = nil
     end
@@ -24,13 +24,18 @@ module Sunspot
         super(collection)
         @current_page = current_page
         @per_page     = per_page
+        @_collection  = collection
       end
 
       alias total_count size
       alias limit_value per_page
 
       def total_pages
-        [(size/per_page.to_f).ceil, 1].max
+        if @_collection.respond_to?(:total_pages)
+          @_collection.total_pages
+        else
+          [(size/per_page.to_f).ceil, 1].max
+        end
       end
       alias num_pages total_pages
 
