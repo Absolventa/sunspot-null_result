@@ -74,6 +74,9 @@ end
 
 ### HEAD (not yet released)
 
+### v0.6.0
+* Support kaminari-paginated enumerables
+
 ### v0.5.0
 * Build on newer MRI version
 * Add Sunspot::NullResult#total and #facet
