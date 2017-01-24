@@ -129,6 +129,10 @@ RSpec.describe Sunspot::NullResult do
         def total_pages
           :total_pages_from_injected_collection
         end
+
+        def total_count
+          :total_count_from_injected_collection
+        end
       }.new(entries)
     end
 
@@ -136,6 +140,13 @@ RSpec.describe Sunspot::NullResult do
       subject { described_class.new(collection).send(method) }
       it 'returns the total pages from the collection' do
         expect(subject.total_pages).to eql :total_pages_from_injected_collection
+      end
+    end
+
+    describe '#total_count' do
+      subject { described_class.new(collection).send(method) }
+      it 'returns the total count from the collection' do
+        expect(subject.total_count).to eql :total_count_from_injected_collection
       end
     end
 

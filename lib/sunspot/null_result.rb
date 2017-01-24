@@ -27,8 +27,16 @@ module Sunspot
         @_collection  = collection
       end
 
-      alias total_count size
       alias limit_value per_page
+
+      def size
+        if @_collection.respond_to?(:total_count)
+          @_collection.total_count
+        else
+          super
+        end
+      end
+      alias total_count size
 
       def total_pages
         if @_collection.respond_to?(:total_pages)
